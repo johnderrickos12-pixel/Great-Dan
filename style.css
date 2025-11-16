@@ -1,35 +1,24 @@
 body {
-    background-color: #333;
+    font-family: 'Arial', sans-serif;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #f0f0f0;
 }
 
-#game-board {
-    display: grid;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(20, 20px);
-    border: 5px solid #555;
-    background-color: #111;
+h1 {
+    color: #333;
 }
 
-.snake {
-    background-color: #0f0;
-    border: 1px solid #333;
+.game-container {
+    border: 5px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.food {
-    background-color: #f00;
-    border-radius: 50%;
-}
-
-#score {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: #fff;
-    font-size: 24px;
+canvas {
+    display: block;
+    background-color: #a8dba8;
 }
