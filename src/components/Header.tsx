@@ -1,11 +1,26 @@
-import { Database, HelpCircle, Bell } from 'lucide-react';
+import { Database, Code, Users, Home, BarChart3, HelpCircle, Bell } from 'lucide-react';
+import { View } from '../App';
 
-const Header = () => {
+interface HeaderProps {
+  activeView: View;
+}
+
+const viewConfig = {
+  tableEditor: { icon: Database, title: 'Table Editor' },
+  sqlEditor: { icon: Code, title: 'SQL Editor' },
+  auth: { icon: Users, title: 'Authentication' },
+  home: { icon: Home, title: 'Home' },
+  usage: { icon: BarChart3, title: 'Usage' },
+};
+
+const Header = ({ activeView }: HeaderProps) => {
+  const { icon: Icon, title } = viewConfig[activeView] || viewConfig.home;
+
   return (
-    <header className="h-16 flex items-center justify-between px-8 border-b border-gray-dark bg-background-light">
+    <header className="h-16 flex items-center justify-between px-8 border-b border-gray-dark bg-background-light flex-shrink-0">
       <div className="flex items-center space-x-3">
-        <Database size={20} className="text-accent-green" />
-        <h1 className="text-lg font-semibold text-foreground">Table Editor</h1>
+        <Icon size={20} className="text-accent-green" />
+        <h1 className="text-lg font-semibold text-foreground">{title}</h1>
       </div>
       <div className="flex items-center space-x-4">
         <button className="text-sm text-gray-light hover:text-foreground">Docs</button>
