@@ -1,34 +1,28 @@
-import { Database, Code, Users, Home, BarChart3, HelpCircle, Bell } from 'lucide-react';
-import { View } from '../App';
+import { ChevronDown, ArrowUpRight } from "lucide-react";
 
 interface HeaderProps {
-  activeView: View;
+  icon: React.ElementType;
+  title: string;
 }
 
-const viewConfig = {
-  tableEditor: { icon: Database, title: 'Table Editor' },
-  sqlEditor: { icon: Code, title: 'SQL Editor' },
-  auth: { icon: Users, title: 'Authentication' },
-  home: { icon: Home, title: 'Home' },
-  usage: { icon: BarChart3, title: 'Usage' },
-};
-
-const Header = ({ activeView }: HeaderProps) => {
-  const { icon: Icon, title } = viewConfig[activeView] || viewConfig.home;
-
+const Header = ({ icon: Icon, title }: HeaderProps) => {
   return (
-    <header className="h-16 flex items-center justify-between px-8 border-b border-gray-dark bg-background-light flex-shrink-0">
+    <header className="flex-shrink-0 bg-gray-900 border-b border-gray-700/50 flex items-center justify-between p-4">
       <div className="flex items-center space-x-3">
-        <Icon size={20} className="text-accent-green" />
-        <h1 className="text-lg font-semibold text-foreground">{title}</h1>
+        <div className="bg-gray-800/80 p-1.5 rounded-md">
+           <Icon className="h-5 w-5 text-green-400" />
+        </div>
+        <h1 className="text-lg font-semibold text-white">{title}</h1>
       </div>
       <div className="flex items-center space-x-4">
-        <button className="text-sm text-gray-light hover:text-foreground">Docs</button>
-        <HelpCircle size={18} className="text-gray-light cursor-pointer hover:text-foreground" />
-        <Bell size={18} className="text-gray-light cursor-pointer hover:text-foreground" />
-        <div className="w-8 h-8 bg-accent-green rounded-full flex items-center justify-center text-background-dark font-bold">
-          Y
-        </div>
+         <button className="flex items-center space-x-2 text-sm text-gray-300 hover:text-white transition-colors duration-200">
+           <ArrowUpRight className="h-4 w-4"/>
+           <span>Docs</span>
+         </button>
+        <button className="flex items-center space-x-2 text-sm text-gray-300 hover:text-white transition-colors duration-200">
+          <span>John Derrick</span>
+          <ChevronDown className="h-4 w-4" />
+        </button>
       </div>
     </header>
   );
