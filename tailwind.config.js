@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,16 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        'background-dark': '#1C1C1C',
-        'background-light': '#282828',
-        'foreground': '#ECEDEE',
-        'gray-dark': '#3D3D3D',
-        'gray-light': '#8E8E8E',
-        'accent-green': '#3ECF8E',
-        'accent-green-dark': '#31A572',
+        'brand-black': '#000000',
+        'brand-gray': '#111111',
+        'brand-light-gray': '#1c1c1c',
+        'brand-text': '#a1a1a1',
+        'brand-purple': '#9e86ff',
       },
       fontFamily: {
-        sans: ['"Inter"', 'sans-serif'],
+        sans: ['"General Sans"', 'sans-serif'],
+      },
+      keyframes: {
+        'gradient-fade': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+      },
+      animation: {
+        'gradient-fade': 'gradient-fade 15s ease infinite',
       },
     },
   },
