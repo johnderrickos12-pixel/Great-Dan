@@ -1,6 +1,21 @@
 import { Home, Database, Code, Shield, Settings, Search, ChevronsUpDown, BarChart3, Users } from 'lucide-react';
+import { cn } from '../lib/utils';
+import { View } from '../App';
 
-const Sidebar = () => {
+interface SidebarProps {
+  activeView: View;
+  setActiveView: (view: View) => void;
+}
+
+const navItems: { id: View; label: string; icon: React.ElementType }[] = [
+  { id: 'home', label: 'Home', icon: Home },
+  { id: 'tableEditor', label: 'Table Editor', icon: Database },
+  { id: 'sqlEditor', label: 'SQL Editor', icon: Code },
+  { id: 'auth', label: 'Authentication', icon: Users },
+  { id: 'usage', label: 'Usage', icon: BarChart3 },
+];
+
+const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
   return (
     <div className="w-64 bg-background-light flex flex-col border-r border-gray-dark">
       <div className="p-4 border-b border-gray-dark">
@@ -23,32 +38,30 @@ const Sidebar = () => {
         </div>
       </div>
       <nav className="flex-1 px-4 space-y-2">
-        <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
-          <Home size={16} className="mr-3" />
-          Home
-        </a>
-        <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-gray-dark text-foreground">
-          <Database size={16} className="mr-3 text-accent-green" />
-          Table Editor
-        </a>
-        <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
-          <Code size={16} className="mr-3" />
-          SQL Editor
-        </a>
-         <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
-          <Users size={16} className="mr-3" />
-          Authentication
-        </a>
-        <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
-          <BarChart3 size={16} className="mr-3" />
-          Usage
-        </a>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => setActiveView(item.id)}
+            className={cn(
+              "w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-left",
+              activeView === item.id 
+                ? 'bg-gray-dark text-foreground' 
+                : 'text-gray-light hover:bg-gray-dark hover:text-foreground'
+            )}
+          >
+            <item.icon 
+              size={16} 
+              className={cn("mr-3", activeView === item.id && 'text-accent-green')} 
+            />
+            {item.label}
+          </button>
+        ))}
       </nav>
       <div className="p-4 border-t border-gray-dark">
-        <a href="#" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
+        <button className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-light hover:bg-gray-dark hover:text-foreground">
           <Settings size={16} className="mr-3" />
           Project Settings
-        </a>
+        </button>
       </div>
     </div>
   );
