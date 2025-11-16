@@ -6,3 +6,48 @@ body {
   background-color: #000;
   color: #fff;
 }
+
+.glow-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.glow-card:hover {
+  transform: translateY(-5px);
+}
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px; /* same as the card's border-radius */
+  padding: 2px; /* border thickness */
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), #9e86ff 0%, transparent 20%);
+  -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: radial-gradient(circle at top, rgba(158, 134, 255, 0.2), transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
