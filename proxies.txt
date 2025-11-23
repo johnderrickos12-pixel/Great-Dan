@@ -1,0 +1,6 @@
+# Add your proxy list here. One proxy per line.
+# Format: IP_ADDRESS:PORT
+# Example:
+192.168.1.100:8080
+127.0.0.1:9050
+203.0.113.55:3128
